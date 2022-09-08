@@ -1,24 +1,26 @@
-const rightArrow = document.getElementsByClassName('slider__arrow_next');
-const leftArrow = document.getElementsByClassName('slider__arrow_prev');
-const slides = Array.from(document.querySelectorAll('.slider__item'));
+"use strict";
 
-function switchSlide (){
-    slides[index].classList.add('slider__item_active');
-}
+const rightArrow = document.getElementsByClassName("slider__arrow_next");
+const leftArrow = document.getElementsByClassName("slider__arrow_prev");
+const slides = Array.from(document.querySelectorAll(".slider__item"));
 
 let index = 0;
 
-rightArrow.onclick = function(){
-    slides[index].classList.remove('slider__item_active');
+function switchSlide (){
+    slides[index].className = "slider__item slider__item_active";
+}
+
+rightArrow[0].onclick = function () {
+    slides[index].className = "slider__item";
     index++;
-    if (index == slides.length){
+    if (index >= slides.length){
         index = 0;
     }
     switchSlide();
 }
 
-leftArrow.onclick = function(){
-    slides[index].classList.remove('slider__item_active');
+leftArrow[0].onclick = function () {
+    slides[index].className = "slider__item";
     index--;
     if (index < 0) {
         index = slides.length - 1;
