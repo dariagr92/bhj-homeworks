@@ -4,14 +4,15 @@ const rightArrow = document.getElementsByClassName("slider__arrow_next");
 const leftArrow = document.getElementsByClassName("slider__arrow_prev");
 const slides = Array.from(document.querySelectorAll(".slider__item"));
 
-let index = 0;
+let index = slides.findIndex((item) => item.classList.contains("slider__item_active"));
 
 function switchSlide (){
     slides[index].className = "slider__item slider__item_active";
 }
 
 rightArrow[0].onclick = function () {
-    slides[index].className = "slider__item";
+    let nextSlide = slides[index];
+    nextSlide.className = "slider__item";
     index++;
     if (index >= slides.length){
         index = 0;
@@ -20,7 +21,8 @@ rightArrow[0].onclick = function () {
 }
 
 leftArrow[0].onclick = function () {
-    slides[index].className = "slider__item";
+    let prevSlide = slides[index];
+    prevSlide.className = "slider__item";
     index--;
     if (index < 0) {
         index = slides.length - 1;
