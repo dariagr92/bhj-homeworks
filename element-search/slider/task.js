@@ -7,7 +7,7 @@ const slides = Array.from(document.querySelectorAll(".slider__item"));
 let index = slides.findIndex((item) => item.classList.contains("slider__item_active"));
 
 function switchSlide (){
-    slides[index].className = "slider__item slider__item_active";
+    let slide = slides[index].className = "slider__item slider__item_active";
 }
 
 rightArrow[0].onclick = function () {
