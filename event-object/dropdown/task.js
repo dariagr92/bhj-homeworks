@@ -1,17 +1,16 @@
-const dropdownLink = Array.from(document.querySelectorAll("a.dropdown__link"));
+const dropdownLink = Array.from(document.getElementsByClassName("dropdown__link"));
 const dropdown = document.querySelector(".dropdown__value");
 const dropdownList = document.querySelector(".dropdown__list");
 
-onClick = function () {
+
+dropdown.addEventListener('click', function (event){
     dropdownList.className = "dropdown__list dropdown__list_active";
-}
-
-rename = function () {
-    this.dropdown
-}
-
-dropdown.addEventListener('click', onClick);
+});
 
 for (let i = 0; i < dropdownLink.length; i++){
-    dropdownList.addEventListener()
+    dropdownLink[i].addEventListener('click', function (e){
+        e.preventDefault();
+        dropdownList.className = "dropdown__list";
+        dropdown.textContent = this.textContent;
+    });
 }
