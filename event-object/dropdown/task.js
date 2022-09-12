@@ -4,7 +4,7 @@ const dropdownList = document.querySelector(".dropdown__list");
 
 
 dropdown.addEventListener('click', function (event){
-    dropdownList.className = "dropdown__list dropdown__list_active";
+    dropdownList.classList.toggle("dropdown__list_active");
 });
 
 for (let i = 0; i < dropdownLink.length; i++){
