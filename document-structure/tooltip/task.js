@@ -13,8 +13,5 @@ tooltips.forEach(tooltip => {
         let position = tooltip.getBoundingClientRect();
         hint.style.left = `${position.left}px`;
         hint.style.top = `${position.bottom}px`;
-
-
-        
-    });
+     });
 });
