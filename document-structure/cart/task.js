@@ -24,16 +24,17 @@ products.forEach((item) =>  {
             let productImg = item.querySelector("img").getAttribute('src');
             let cartQuantity = quantity.textContent;
 
-            if (!cartProducts.querySelector(`[data-id='${productId}']`)){
-                cartProducts.insertAdjacentHTML('beforeend', 
+            let cartProduct = Array.from(document.querySelectorAll('.cart__product'));
+                        
+            let existCart = cartProduct.find((el) => el.dataset.id === productId);
+            if (existCart){
+               existCart.querySelector('.cart__product-count').innerHTML = Number(existCart.querySelector('.cart__product-count').innerHTML) + Number(cartQuantity);
+            } else {
+            cartProducts.insertAdjacentHTML('beforeend', 
                 `<div class="cart__product" data-id="${productId}">
                 <img class="cart__product-image" src="${productImg}">
                 <div class="cart__product-count">${cartQuantity}</div>
-                </div>`);
-            } else {
-                cartProducts.querySelector('.cart__product-count').textContent = Number(cartQuantity) + Number(quantity.textContent);
-            }
-           
+                </div>`);}
             }   
         );
 });
