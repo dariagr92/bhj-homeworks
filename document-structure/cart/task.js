@@ -3,7 +3,7 @@ const products = document.querySelectorAll('.product');
 products.forEach((item) =>  {
     const quantityInc = item.querySelector('.product__quantity-control_inc');
     const quantityDec = item.querySelector('.product__quantity-control_dec');
-    const quantity = item.querySelector('.product__quantity-value');
+    let quantity = item.querySelector('.product__quantity-value');
 
         quantityInc.addEventListener('click', () => {
             quantity.textContent++;
@@ -20,16 +20,20 @@ products.forEach((item) =>  {
 
         addButton.addEventListener('click', (e) => {
             let cartProducts = document.querySelector('.cart__products');
-            if (cartProducts.querySelector(`[data-id='${item.dataset.id}']`)){
-                let cartQuantity = Number(cartProducts.querySelector(`[data-id='${item.dataset.id}']`).querySelector('.cart__product-count').innerText) + quantity;
-                Number(cartProducts.querySelector(`[data-id='${item.dataset.id}']`).querySelector('.cart__product-count').innerText) = cartQuantity;
+            let productId = item.dataset.id;
+            let productImg = item.querySelector("img").getAttribute('src');
+            let cartQuantity = quantity.textContent;
+
+            if (!cartProducts.querySelector(`[data-id='${productId}']`)){
+                cartProducts.insertAdjacentHTML('beforeend', 
+                `<div class="cart__product" data-id="${productId}">
+                <img class="cart__product-image" src="${productImg}">
+                <div class="cart__product-count">${cartQuantity}</div>
+                </div>`);
             } else {
-            cartProducts.insertAdjacentHTML('beforeend', 
-            `<div class="cart__product" data-id="${item.dataset.id}">
-            <img class="cart__product-image" src="${item.querySelector("img").getAttribute('src')}">
-            <div class="cart__product-count">${quantity.textContent}</div>
-            </div>`);
-        };
-    }
-);
+                cartProducts.querySelector('.cart__product-count').textContent = Number(cartQuantity) + Number(quantity.textContent);
+            }
+           
+            }   
+        );
 });
