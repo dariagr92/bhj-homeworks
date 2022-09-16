@@ -1,31 +1,24 @@
-const tooltips = Array.from(document.querySelectorAll('.has-tooltip'));
+const hasTooltips = Array.from(document.querySelector('.has-tooltip'));
+let tooltip = document.querySelector('.tooltip');
+let hint = document.createElement('div');   
+hint.classList.add('tooltip');
 
-tooltips.forEach(tooltip => {
 
-        
+hasTooltips.forEach((el) => el.addEventListener('click', (e) => {
+    e.preventDefault();
     
-    tooltip.addEventListener('click', (event) => {
-        event.preventDefault();
-        const activeTooltip = Array.from(document.querySelectorAll('.tooltip_active'));
+    hint.style.position = "absolute";
+    el.insertAdjacentElement("afterend", hint);
 
-        let hint = document.createElement('div');
-        hint.textContent = tooltip.title;
-        hint.classList.add('tooltip');
+    if (hint.textContent === el.title){
+        hint.classList.toggle('tooltip_active');
+    } else {       
         hint.classList.add('tooltip_active');
-        tooltip.insertAdjacentElement("afterBegin", hint);
-        
-
-        hint.style.position = "absolute";
-        let position = tooltip.getBoundingClientRect();
+        let position = el.getBoundingClientRect();
         hint.style.left = `${position.left}px`;
         hint.style.top = `${position.bottom}px`;
+        hint.textContent = el.title;
+    }
+    
+}));
 
-        activeTooltip.forEach(item => {
-            if (item.classList.contains('tooltip_active')){
-                item.classList.remove('tooltip_active');
-            } else {
-                item.classList.add('tooltip_active');
-            }
-     })
-});
-});
